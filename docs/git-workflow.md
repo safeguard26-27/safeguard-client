@@ -6,7 +6,7 @@
 
 - 전략: `main` + 작업 브랜치. 작업 브랜치는 `main`에서 분기하고, PR로 `main`에 병합한다.
 - `main`에 직접 push할 수 없다. (GitHub Ruleset으로 차단, 아래 [GitHub 레포 설정](#github-레포-설정) 참고)
-- 이름: `<type>/<#이슈번호>-<짧은-설명>`
+- 이름: `<type>/<이슈번호>-<짧은-설명>`
   - type은 커밋 type과 같다: `feat`, `fix`, `refactor`, `style`, `test`, `docs`, `chore`
   - 설명은 영어 소문자 kebab-case, 3~5단어
 
@@ -65,15 +65,15 @@ docs: Git 워크플로우 문서 추가
 ## PR
 
 - **모든 PR은 이슈가 있어야 한다.** 이슈 없이 PR을 만들지 않는다. 먼저 이슈를 만든다.
-- 제목: `[TYPE] <요약> #<이슈번호>`
+- 제목: `[TYPE] <요약> (#<이슈번호>)`
   - TYPE은 커밋 type을 대문자로 쓴다: `FEAT`, `FIX`, `REFACTOR`, `STYLE`, `TEST`, `DOCS`, `CHORE`
   - 요약은 한국어, 마침표 없이 쓴다.
-  - 제목 끝의 `#<이슈번호>`로 이슈를 멘션한다.
+  - 제목 끝의 `(#<이슈번호>)`로 이슈를 멘션한다.
 
 ```
-[FEAT] 대시보드 골격 추가 #12
-[FIX] SSE 재연결 시 누락 보정 #31
-[CHORE] 프로젝트 초기 세팅 #1
+[FEAT] 대시보드 골격 추가 (#12)
+[FIX] SSE 재연결 시 누락 보정 (#31)
+[CHORE] 프로젝트 초기 세팅 (#2)
 ```
 
 - 본문: `.github/pull_request_template.md`를 채운다. 보안 체크 항목은 빠짐없이 확인한다.
