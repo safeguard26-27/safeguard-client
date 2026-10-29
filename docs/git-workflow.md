@@ -6,7 +6,7 @@
 
 - 전략: `main` + 작업 브랜치. 작업 브랜치는 `main`에서 분기하고, PR로 `main`에 병합한다.
 - `main`에 직접 push할 수 없다. (GitHub Ruleset으로 차단, 아래 [GitHub 레포 설정](#github-레포-설정) 참고)
-- 이름: `<type>/<이슈번호>-<짧은-설명>`
+- 이름: `<type>/<#이슈번호>-<짧은-설명>`
   - type은 커밋 type과 같다: `feat`, `fix`, `refactor`, `style`, `test`, `docs`, `chore`
   - 설명은 영어 소문자 kebab-case, 3~5단어
 
