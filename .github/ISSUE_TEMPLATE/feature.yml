@@ -1,6 +1,6 @@
 name: 기능 추가
 description: 새 화면이나 기능을 만든다
-title: "[Feat] "
+title: "[FEAT] "
 labels: ["feat"]
 body:
   - type: textarea

@@ -1,6 +1,6 @@
 name: 버그 제보
 description: 의도와 다르게 동작하는 문제
-title: "[Bug] "
+title: "[BUG] "
 labels: ["bug"]
 body:
   - type: textarea
