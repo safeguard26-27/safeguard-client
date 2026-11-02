@@ -1,37 +1,62 @@
-name: 버그 제보
+name: 🐛 버그 제보
 description: 의도와 다르게 동작하는 문제
 title: "[BUG] "
-labels: ["bug"]
+labels: ["bug 🐛"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        버그를 제보합니다. 제목은 `[BUG] 요약` 형식으로 씁니다.
+        ⚠️ 로그·스크린샷의 **토큰, 이메일, 장비 UUID 등 개인·인증 정보는 반드시 가려 주세요.** (공개 레포)
+
   - type: textarea
     id: what
     attributes:
-      label: 현상
+      label: 🐞 현상
+      description: 무엇이 잘못되었나요?
+      placeholder: 예) SSE 연결이 끊긴 뒤 재연결되어도 새 이벤트가 목록에 반영되지 않는다
     validations:
       required: true
+
   - type: textarea
     id: steps
     attributes:
-      label: 재현 방법
+      label: 🔁 재현 방법
       value: |
         1.
         2.
         3.
     validations:
       required: true
+
   - type: textarea
     id: expected
     attributes:
-      label: 기대 동작
+      label: 🎯 기대 동작
     validations:
       required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🔥 심각도
+      options:
+        - 높음 (주요 기능 사용 불가, 데이터 오표시)
+        - 보통 (우회 가능)
+        - 낮음 (표시·사용성 문제)
+    validations:
+      required: true
+
   - type: input
     id: env
     attributes:
-      label: 환경
-      description: 기기, OS, 브라우저 (예 Galaxy S23 / Android 14 / Chrome)
+      label: 📱 환경
+      description: 기기, OS, 브라우저
+      placeholder: 예) Galaxy S23 / Android 14 / Chrome 130
+
   - type: textarea
     id: log
     attributes:
-      label: 로그·스크린샷
+      label: 📎 로그·스크린샷
       description: 토큰, 개인정보는 가리고 첨부
+      render: shell

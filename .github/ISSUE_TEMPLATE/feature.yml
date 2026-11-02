@@ -1,38 +1,72 @@
-name: 기능 추가
+name: ✨ 기능 추가
 description: 새 화면이나 기능을 만든다
 title: "[FEAT] "
-labels: ["feat"]
+labels: ["feat ✨"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        새 화면·기능 작업을 등록합니다. 제목은 `[FEAT] 요약` 형식으로 씁니다.
+        등록 후 오른쪽 **Labels**에서 `area: *`, `priority: *` 라벨을 붙여 주세요.
+
   - type: textarea
     id: summary
     attributes:
-      label: 개요
+      label: 📌 개요
       description: 무엇을 만드는지 한두 줄로
+      placeholder: 예) 모바일 대시보드에 활성 이벤트 목록을 표시한다
     validations:
       required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 🧭 영역
+      options:
+        - auth (로그인, 토큰, 권한)
+        - dashboard (대시보드)
+        - equipment (장비)
+        - events (이벤트, SSE)
+        - inspection (점검, NFC·QR)
+        - notification (푸시, FCM)
+        - infra (Docker, nginx, 배포, PWA)
+    validations:
+      required: true
+
   - type: textarea
     id: spec
     attributes:
-      label: 상세 내용
-      description: 화면 구성, 동작, 관련 기능 명세 ID(예 WEB-DSH-001, MOB-QR-001) 등
+      label: 📝 상세 내용
+      description: 화면 구성, 동작, 관련 기능 명세 ID 등
+      placeholder: |
+        - 기능 명세: WEB-DSH-001, MOB-QR-001
+        - 화면 구성:
+        - 동작:
     validations:
       required: true
+
   - type: textarea
     id: criteria
     attributes:
-      label: 완료 조건
+      label: ✅ 완료 조건
       value: |
         - [ ]
         - [ ]
+        - [ ] `npm run lint`, `npm run build` 통과
     validations:
       required: true
+
   - type: textarea
     id: backend
     attributes:
-      label: 백엔드 의존성
-      description: 필요한 API, 이벤트(SSE), 아직 확정되지 않은 부분
+      label: 🔌 백엔드 의존성
+      description: "필요한 API, 이벤트(SSE), 아직 확정되지 않은 부분. 명세 대기 중이면 `blocked: backend ⛔` 라벨을 붙여 주세요."
+      placeholder: |
+        - API: GET /api/...
+        - 미확정:
+
   - type: textarea
     id: design
     attributes:
-      label: 디자인 참고
+      label: 🎨 디자인 참고
       description: 시안 링크, 스크린샷

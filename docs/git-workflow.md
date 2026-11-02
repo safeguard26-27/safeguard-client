@@ -4,8 +4,16 @@
 
 ## 브랜치
 
-- 전략: `main` + 작업 브랜치. 작업 브랜치는 `main`에서 분기하고, PR로 `main`에 병합한다.
-- `main`에 직접 push할 수 없다. (GitHub Ruleset으로 차단, 아래 [GitHub 레포 설정](#github-레포-설정) 참고)
+- 전략: `main` + `develop` + 작업 브랜치
+
+| 브랜치 | 용도 |
+| --- | --- |
+| `main` | 배포 브랜치. `develop`에서 PR로만 병합한다 |
+| `develop` | 통합 브랜치 (GitHub 기본 브랜치). 작업 브랜치가 여기로 병합된다 |
+| 작업 브랜치 | `develop`에서 분기하고, PR로 `develop`에 병합한다 |
+
+- 배포할 때 `develop` → `main` PR을 만든다. 이 PR도 이슈가 있어야 하며 제목은 `[CHORE] <버전 또는 요약> 배포 (#<이슈번호>)`로 쓴다.
+- `main`, `develop`에 직접 push할 수 없다. (GitHub Ruleset으로 차단, 아래 [GitHub 레포 설정](#github-레포-설정) 참고)
 - 이름: `<type>/<이슈번호>-<짧은-설명>`
   - type은 커밋 type과 같다: `feat`, `fix`, `refactor`, `style`, `test`, `docs`, `chore`
   - 설명은 영어 소문자 kebab-case, 3~5단어
@@ -38,7 +46,7 @@ chore/5-github-templates
 - 요약은 **한국어**, 50자 이내, 마침표 없이, 명사형으로 끝낸다.
 - 본문에는 무엇보다 **왜** 바꿨는지를 적는다.
 - 한 커밋에는 논리 단위 하나만 담는다.
-- 병합 방식이 Merge commit이라 브랜치의 커밋이 그대로 `main` 이력에 남는다.
+- 병합 방식이 Merge commit이라 브랜치의 커밋이 그대로 `develop`, `main` 이력에 남는다.
   `wip`, `수정` 같은 커밋은 PR 올리기 전에 정리한다.
 
 ```
@@ -52,11 +60,23 @@ docs: Git 워크플로우 문서 추가
 
 - 템플릿(`.github/ISSUE_TEMPLATE/`)으로만 만든다. 빈 이슈는 막혀 있다.
 
-| 템플릿      | 제목 접두어 | 라벨    |
-| ----------- | ----------- | ------- |
-| 기능 추가   | `[FEAT] `   | `feat`  |
-| 버그 제보   | `[BUG] `    | `bug`   |
-| 작업 (Task) | `[CHORE] `  | `chore` |
+| 템플릿      | 제목 접두어 | 라벨       |
+| ----------- | ----------- | ---------- |
+| 기능 추가   | `[FEAT] `   | `feat ✨`  |
+| 버그 제보   | `[BUG] `    | `bug 🐛`   |
+| 작업 (Task) | `[CHORE] `  | `chore 🔧` |
+
+### 라벨
+
+유형 라벨은 템플릿이 자동으로 붙인다. 영역·우선순위·상태 라벨은 이슈를 만든 뒤 직접 붙인다. PR에도 같은 라벨을 붙인다.
+
+| 분류 | 라벨 | 용도 |
+| --- | --- | --- |
+| 유형 | `feat ✨`, `bug 🐛`, `refactor ♻️`, `docs 📝`, `chore 🔧` | 작업 종류 (커밋 type과 대응) |
+| 영역 | `area: auth 🔐`, `area: dashboard 📊`, `area: equipment 🧯`, `area: events 🚨`, `area: inspection 📲`, `area: notification 🔔`, `area: infra 🐳` | 작업 대상 기능 |
+| 우선순위 | `priority: high 🔴`, `priority: medium 🟡`, `priority: low 🟢` | 처리 순서 |
+| 상태 | `blocked: backend ⛔` | 백엔드 API·명세 확정 대기 |
+| 상태 | `needs discussion 💬` | 팀 논의·결정 필요 |
 
 - 이슈 1개 = PR 1개를 원칙으로 한다. 이슈 없는 PR은 만들지 않는다.
 - 작업 시작 전에 담당자(assignee)를 지정한다.
@@ -77,7 +97,9 @@ docs: Git 워크플로우 문서 추가
 ```
 
 - 본문: `.github/pull_request_template.md`를 채운다. 보안 체크 항목은 빠짐없이 확인한다.
+- base 브랜치: 작업 PR은 `develop`, 배포 PR만 `main`이다.
 - 이슈 연결: 본문 "관련 이슈"에 `Closes #<이슈번호>`를 적어 병합 시 이슈가 자동으로 닫히게 한다.
+  (GitHub은 **기본 브랜치**에 병합될 때만 이슈를 자동으로 닫는다. 그래서 `develop`을 기본 브랜치로 둔다)
 - 병합: **Merge commit**으로 병합한다. 리뷰 승인은 필수가 아니다. 병합 후 작업 브랜치는 삭제한다.
 - 병합 전 `npm run lint`, `npm run build` 통과를 확인한다.
 
@@ -86,8 +108,8 @@ docs: Git 워크플로우 문서 추가
 ```bash
 # 1. GitHub에서 이슈 생성 (예: #12 [FEAT] 모바일 대시보드 골격)
 
-# 2. 브랜치 생성
-git switch main
+# 2. 브랜치 생성 (develop 기준)
+git switch develop
 git pull
 git switch -c feat/12-dashboard-skeleton
 
@@ -95,16 +117,17 @@ git switch -c feat/12-dashboard-skeleton
 git add <파일>
 git commit -m "feat: 대시보드 골격 추가"
 
-# 4. push 후 PR 생성 (본문에 Closes #12)
+# 4. push 후 develop 대상으로 PR 생성 (본문에 Closes #12)
 git push -u origin feat/12-dashboard-skeleton
 ```
 
 ## GitHub 레포 설정
 
+- Settings → General → Default branch: `develop`
 - Settings → Rules → Rulesets → New branch ruleset
   - Enforcement status: `Active`
   - Bypass list: 비움 (관리자도 예외 없음)
-  - Target branches: `Include default branch` (`main`)
+  - Target branches: `Include by pattern`으로 `main`, `develop` 두 개 추가
   - Rules
     - Restrict deletions
     - Block force pushes
@@ -112,4 +135,4 @@ git push -u origin feat/12-dashboard-skeleton
 - Settings → General → Pull Requests
   - Allow merge commits만 켠다 (squash, rebase 끔)
   - Automatically delete head branches 켠다
-- Issues → Labels: `feat`, `bug`, `chore` 라벨을 만들어 둔다 (템플릿이 자동으로 붙인다)
+- Issues → Labels: 위 [라벨](#라벨) 표의 라벨을 만들어 둔다 (이름이 정확히 같아야 템플릿이 자동으로 붙인다)
