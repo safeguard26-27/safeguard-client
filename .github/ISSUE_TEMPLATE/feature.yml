@@ -1,0 +1,38 @@
+name: 기능 추가
+description: 새 화면이나 기능을 만든다
+title: "[FEAT] "
+labels: ["feat"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 개요
+      description: 무엇을 만드는지 한두 줄로
+    validations:
+      required: true
+  - type: textarea
+    id: spec
+    attributes:
+      label: 상세 내용
+      description: 화면 구성, 동작, 관련 기능 명세 ID(예 WEB-DSH-001, MOB-QR-001) 등
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: 완료 조건
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: backend
+    attributes:
+      label: 백엔드 의존성
+      description: 필요한 API, 이벤트(SSE), 아직 확정되지 않은 부분
+  - type: textarea
+    id: design
+    attributes:
+      label: 디자인 참고
+      description: 시안 링크, 스크린샷
