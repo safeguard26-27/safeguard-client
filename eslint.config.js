@@ -29,4 +29,11 @@ export default defineConfig([
       ],
     },
   },
+  {
+    // shadcn 생성 컴포넌트는 *Variants 등을 함께 export 한다 (shadcn add 로 갱신되므로 직접 수정하지 않는다)
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
