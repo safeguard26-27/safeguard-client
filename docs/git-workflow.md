@@ -85,6 +85,7 @@ docs: Git 워크플로우 문서 추가
 ## PR
 
 - **모든 PR은 이슈가 있어야 한다.** 이슈 없이 PR을 만들지 않는다. 먼저 이슈를 만든다.
+  - 예외: Dependabot이 자동으로 만드는 의존성 업데이트 PR(`chore(deps): ...`, `chore(ci): ...`)은 이슈와 제목 형식 규칙을 적용하지 않는다. CI 통과를 확인하고 `develop`에 병합한다.
 - 제목: `[TYPE] <요약> (#<이슈번호>)`
   - TYPE은 커밋 type을 대문자로 쓴다: `FEAT`, `FIX`, `REFACTOR`, `STYLE`, `TEST`, `DOCS`, `CHORE`
   - 요약은 한국어, 마침표 없이 쓴다.

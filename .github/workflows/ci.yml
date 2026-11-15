@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, develop]
+
+# 최소 권한: 코드 읽기만 허용한다.
+permissions:
+  contents: read
+
+# 같은 브랜치에 새 커밋이 오면 이전 실행은 취소한다.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20 # Dockerfile(node:20-alpine)과 맞춘다
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      # VITE_* 값은 번들에 공개되는 값이고 빌드 성공에는 필요 없다. 시크릿을 넣지 않는다.
+      - run: npm run build
+
+      # high 이상 취약점을 보고만 하고 CI를 실패시키지 않는다.
+      - run: npm audit --audit-level=high
+        continue-on-error: true
