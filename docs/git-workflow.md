@@ -73,8 +73,8 @@ docs: Git 워크플로우 문서 추가
 | 분류 | 라벨 | 용도 |
 | --- | --- | --- |
 | 유형 | `feat ✨`, `bug 🐛`, `refactor ♻️`, `docs 📝`, `chore 🔧` | 작업 종류 (커밋 type과 대응) |
-| 영역 | `area: auth 🔐`, `area: dashboard 📊`, `area: equipment 🧯`, `area: events 🚨`, `area: inspection 📲`, `area: notification 🔔`, `area: infra 🐳` | 작업 대상 기능 |
-| 우선순위 | `priority: high 🔴`, `priority: medium 🟡`, `priority: low 🟢` | 처리 순서 |
+| 영역 | `area: auth`, `area: dashboard`, `area: equipment`, `area: events`, `area: inspection`, `area: notification`, `area: infra` | 작업 대상 기능 |
+| 우선순위 | `high`, `medium`, `low` | 처리 순서 |
 | 상태 | `blocked: backend ⛔` | 백엔드 API·명세 확정 대기 |
 | 상태 | `needs discussion 💬` | 팀 논의·결정 필요 |
 
