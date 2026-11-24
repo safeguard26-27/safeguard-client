@@ -60,23 +60,22 @@ docs: Git 워크플로우 문서 추가
 
 - 템플릿(`.github/ISSUE_TEMPLATE/`)으로만 만든다. 빈 이슈는 막혀 있다.
 
-| 템플릿      | 제목 접두어 | 라벨       |
-| ----------- | ----------- | ---------- |
-| 기능 추가   | `[FEAT] `   | `feat ✨`  |
-| 버그 제보   | `[BUG] `    | `bug 🐛`   |
-| 작업 (Task) | `[CHORE] `  | `chore 🔧` |
+| 템플릿      | 제목 접두어 | 라벨    |
+| ----------- | ----------- | ------- |
+| 기능 추가   | `[FEAT] `   | `feat`  |
+| 버그 제보   | `[BUG] `    | `bug`   |
+| 작업 (Task) | `[CHORE] `  | `chore` |
 
 ### 라벨
 
-유형 라벨은 템플릿이 자동으로 붙인다. 영역·우선순위·상태 라벨은 이슈를 만든 뒤 직접 붙인다. PR에도 같은 라벨을 붙인다.
+유형 라벨은 템플릿이 자동으로 붙인다. 우선순위·상태 라벨은 이슈를 만든 뒤 직접 붙인다. PR에도 유형·우선순위 라벨을 붙인다.
 
 | 분류 | 라벨 | 용도 |
 | --- | --- | --- |
-| 유형 | `feat ✨`, `bug 🐛`, `refactor ♻️`, `docs 📝`, `chore 🔧` | 작업 종류 (커밋 type과 대응) |
-| 영역 | `area: auth`, `area: dashboard`, `area: equipment`, `area: events`, `area: inspection`, `area: notification`, `area: infra` | 작업 대상 기능 |
+| 유형 | `feat`, `bug`, `refactor`, `docs`, `chore` | 작업 종류 (커밋 type과 대응) |
 | 우선순위 | `high`, `medium`, `low` | 처리 순서 |
-| 상태 | `blocked: backend ⛔` | 백엔드 API·명세 확정 대기 |
-| 상태 | `needs discussion 💬` | 팀 논의·결정 필요 |
+| 상태 | `blocked: backend` | 백엔드 API·명세 확정 대기 |
+| 상태 | `needs discussion` | 팀 논의·결정 필요 |
 
 - 이슈 1개 = PR 1개를 원칙으로 한다. 이슈 없는 PR은 만들지 않는다.
 - 작업 시작 전에 담당자(assignee)를 지정한다.
