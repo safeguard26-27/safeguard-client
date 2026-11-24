@@ -1,18 +1,25 @@
 version: 2
 
+# 업데이트를 묶어서 받는다. 보안 업데이트는 일정과 관계없이 바로 온다.
 updates:
   - package-ecosystem: npm
     directory: /
     target-branch: develop
     schedule:
-      interval: weekly
-      day: monday
+      interval: monthly
       timezone: Asia/Seoul
     open-pull-requests-limit: 5
     commit-message:
       prefix: chore(deps)
     labels:
       - "chore"
+    groups:
+      # minor/patch는 PR 1개로 묶는다
+      npm-minor-patch:
+        update-types: ["minor", "patch"]
+      # major는 깨질 수 있으니 따로 묶는다
+      npm-major:
+        update-types: ["major"]
 
   - package-ecosystem: github-actions
     directory: /
@@ -24,3 +31,6 @@ updates:
       prefix: chore(ci)
     labels:
       - "chore"
+    groups:
+      github-actions:
+        patterns: ["*"]
